@@ -132,9 +132,5 @@ describe('unalib', function () {
     });
 
   });
-
-it('forzar error para evidencia', function () {
-    expect(1).to.equal(2);
-  });
   
 });
