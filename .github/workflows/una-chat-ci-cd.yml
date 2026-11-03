@@ -11,6 +11,23 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      # 1. Pruebas automáticas (package.json)
+      - name: Ejecutar pruebas
+        run: npm test
+
+      # 2. Despliegue en Render (solo se ejecuta si las pruebas pasan)
       - name: Solicitar despliegue
         env:
           RENDER_DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
